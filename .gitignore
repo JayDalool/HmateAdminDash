@@ -28,3 +28,8 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+
+# Remove mix artifacts
+/public/css
+/public/js
+/public/mix-manifest.json

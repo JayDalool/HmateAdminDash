@@ -1,3 +1,4 @@
+
 @props(['header'])
 
 <!DOCTYPE html>
@@ -17,7 +18,9 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-        <x-layouts.navigation />
+        @include('layouts.navigation')
+
+
 
         @if (isset($header))
             <header class="bg-white shadow">
@@ -33,3 +36,5 @@
     </div>
 </body>
 </html>
+
+

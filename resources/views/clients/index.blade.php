@@ -1,43 +1,45 @@
+
 @extends('layouts.app')
 
 @section('content')
-<div class="flex">
+<div class="flex min-h-screen">
     {{-- Sidebar --}}
-    <div class="w-1/5 bg-gray-800 text-white h-screen p-4">
-        <h2 class="text-lg font-bold mb-4">Admin Panel</h2>
-        <ul>
-            <li><a href="{{ route('clients.index') }}" class="block py-2">Clients</a></li>
-            <li><a href="#" class="block py-2">Transactions</a></li>
-            <li><a href="#" class="block py-2">Settings</a></li>
-        </ul>
-    </div>
+    <aside class="w-64 bg-gray-800 text-white p-6 space-y-4">
+        <h2 class="text-xl font-bold">Admin Panel</h2>
+        <nav class="space-y-2">
+            <a href="{{ route('clients.index') }}" class="block hover:underline">Clients</a>
+            <a href="#" class="block hover:underline">Transactions</a>
+            <a href="#" class="block hover:underline">Settings</a>
+        </nav>
+    </aside>
 
     {{-- Main Content --}}
-    <div class="w-4/5 p-6">
+    <main class="flex-1 p-8">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold">Clients</h1>
-            <a href="{{ route('clients.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">+ Add Client</a>
+            <h1 class="text-3xl font-bold">Clients</h1>
+            <a href="{{ route('clients.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded shadow">+ Add Client</a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             @foreach($clients as $client)
-            <div class="bg-white rounded shadow p-4">
-                <h2 class="text-lg font-semibold">{{ $client->name }}</h2>
+            <div class="bg-white rounded-lg shadow p-6 space-y-2">
+                <h2 class="text-xl font-semibold text-gray-800">{{ $client->name }}</h2>
                 <p>Status: <span class="font-medium">{{ ucfirst($client->status) }}</span></p>
                 <p>Start: {{ $client->subscription_start_date }}</p>
                 <p>Renew: {{ $client->renewal_date }}</p>
                 <p>Paid: ${{ $client->amount_paid }}</p>
-                <div class="mt-4 flex justify-between">
-                    <a href="{{ route('clients.edit', $client) }}" class="text-blue-600">Edit</a>
+                <div class="flex justify-between pt-4">
+                    <a href="{{ route('clients.edit', $client) }}" class="text-blue-600 hover:underline">Edit</a>
                     <form action="{{ route('clients.destroy', $client) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-600">Delete</button>
+                        <button type="submit" class="text-red-600 hover:underline">Delete</button>
                     </form>
                 </div>
             </div>
             @endforeach
         </div>
-    </div>
+    </main>
 </div>
 @endsection
+
