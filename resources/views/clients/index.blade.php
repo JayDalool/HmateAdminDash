@@ -1,8 +1,11 @@
 
-@extends('layouts.app')
-
-@section('content')
-<div class="flex min-h-screen">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Clients') }}
+        </h2>
+    </x-slot>
+    <div class="flex min-h-screen">
     {{-- Sidebar --}}
     <aside class="w-64 bg-gray-800 text-white p-6 space-y-4">
         <h2 class="text-xl font-bold">Admin Panel</h2>
@@ -40,6 +43,6 @@
             @endforeach
         </div>
     </main>
-</div>
-@endsection
+    </div>
+</x-app-layout>
 
